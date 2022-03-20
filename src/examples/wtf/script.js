@@ -60,7 +60,7 @@ downloadButton.onclick = download
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // more globals
-let scene, camera, renderer, controls, area, price, price1, price2; //sunpos ,stats;
+let scene, camera, renderer, controls, area, price, price1, price2, price3; //sunpos ,stats;
  /**
   * Sets up the scene, camera, renderer, lights and controls and starts the animation
   */
@@ -201,6 +201,12 @@ for (const path in values[i].InnerTree) {
           console.log(price2)
         }  
 
+        if (values[i].ParamName == "RH_OUT:price3") {
+          //price3 = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+          price3 = Math.round(branch[j].data)
+          console.log(price3)
+        }  
+
         if (rhinoObject !== null) {
           doc.objects().add(rhinoObject, null)
         
@@ -214,6 +220,8 @@ document.getElementById('area').innerText = "Habitable Surface  = " + area + " m
 document.getElementById('price').innerText = " Construction Price  = " + price + " MAD"
 document.getElementById('price1').innerText = " Selling Price  = " + price1 + " MAD"
 document.getElementById('price2').innerText = " Investment Benefit = " + price2 + " MAD"
+document.getElementById('price3').innerText = " Benefit Pourcentage = " + price3 + " %"
+
 //GET VALUES
 
  

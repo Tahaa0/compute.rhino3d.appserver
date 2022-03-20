@@ -14,7 +14,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'MMM212_18.gh',
+  definition: 'MMM212_22.gh',
   inputs: getInputs()
 }
 
@@ -98,7 +98,7 @@ const bulbGeometry = new THREE.SphereGeometry( 0.02, 16, 8 );
 
     // create a scene and a camera
     scene = new THREE.Scene()
-    scene.background = new THREE.Color(1, 1, 1)
+    scene.background = new THREE.Color(0, 99, 1)
     camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 1000)
     camera.position.set(1, -1, 1) // like perspective view
 

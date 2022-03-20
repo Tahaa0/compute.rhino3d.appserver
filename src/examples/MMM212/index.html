@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+       <meta charset="utf-8">
+        <title>MAISON</title>
+<style>
+            
+            body { background-color: rgb(0, 99, 65); }
+            
+            body { margin: 10; font-family: Arial, Helvetica, sans-serif; }
+            input {width: 50%;}
+          /* style user strings pop-up */
+          #container {
+                position: absolute;
+                z-index: 100;
+                top: 10px
+                margin: 10px;
+                padding: 10px;
+               /*  background-color: black; */
+                color: rgb(255, 255, 255);
+                width: 500px;
+                font-family: monospace;
+            }
+
+            table { border: none; border-collapse: collapse; }
+            table td {
+                border-left: 1px solid white;
+                padding: 10px;
+            }
+            table td:first-child { border-left: none; }
+            }
+            #overlay {z-index: 1; width: 100%}
+
+            #loader {
+                border: 5px solid #e7d7d1; /* Light grey */
+                border-top: 5px solid #3d3d3d; /* Grey */
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;npm
+                animation: spin 1s linear infinite;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 2;
+                
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loader"></div> 
+        <div id="container">
+                <audio id= "audio1"  autoplay loop  >
+                    <source src="ambient.wav"  type="audio/mp3">
+                </audio>
+            <div id="overlay">
+                <div>
+                    <input type="range" id="Depth" name="Depth" min="1" max="20" value="7" step="1">
+                    <label for="Depth">Depth</label>
+                </div>
+                <div>
+                    <input type="range" id="Length" name="Length" min="1" max="20" value="7" step="1">
+                    <label for="Length">Lenght</label>
+                </div>
+                <div>
+                    <input type="range" id="Number of Façades" name="Number of Façades" min="1" max="4" value="1" step="1">
+                    <label for="Number of Façades">Number of Façades</label>
+                </div>
+                <div>
+                    <input type="range" id="Trame de sructure" name="Trame de sructure" min="3" max="5" value="3" step="1">
+                    <label for="Trame de sructure">Structure Span</label>
+                </div>
+                <div><button id="shot" disabled>Screenshot</button></div>
+                <div style="height:10px; width:100%; clear:both;"></div>
+                <div><button style="background-color:rgb(0,99,65)  "  id="downloadButton" disabled>   تحميل  منزل </button></div>
+                
+
+            </div>
+        </div>
+        
+        <script type="module" src="mmmtestnew.js"></script>
+        
+    </body>
+</html>

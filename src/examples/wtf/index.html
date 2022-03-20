@@ -37,8 +37,17 @@
                   </div>
 
                   <div class="bar">
+                    <label for="Interior Finishing Price /m²">Interior Finishing Price /m²</label>
+                  </div>
+
+                  <div class="bar">
+                    <input type="range" id="Interior Finishing Price /m²" name="Interior Finishing Price /m²" min="1500" max="6000" value="2000" oninput="rangeValue12.innerText= this.value" step="100"class="slider">
+                    <p id="rangeValue12">1000</p><p> MAD / m²</p>
+                    </div>
+
+                  <div class="bar">
                     <label for="Number of Floors">Number of Floors</label>
-                    <input type="range" id="Number of Floors" name="Number of Floors" min="1" max="6" value="2" oninput="rangeValue7.innerText= this.value" step="1"class="slider">
+                    <input type="range" id="Number of Floors" name="Number of Floors" min="1" max="6" value="1" oninput="rangeValue7.innerText= this.value" step="1"class="slider">
                     <p id="rangeValue7">2</p>
                   </div>
 

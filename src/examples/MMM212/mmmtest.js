@@ -7,7 +7,7 @@ import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.124.0/examp
 
             //this is for music background
             var audio = document.getElementById("audio1");
-            audio.volume = 0.2;
+            audio.volume = 0.1;
 
 const definitionName = "MMM 2.gh";
 

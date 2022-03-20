@@ -1,3 +1,4 @@
+
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.126.0/build/three.module.js'
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/controls/OrbitControls.js'
 import { Rhino3dmLoader } from 'https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/loaders/3DMLoader.js'
@@ -14,7 +15,7 @@ const data = {
 }
 
 // globals
-let rhino, doc 
+let rhino, doc
 
 rhino3dm().then(async m => {
     rhino = m
@@ -66,21 +67,17 @@ let scene, camera, renderer, controls, area
  */
 function init() {
 
-      //Change up to z-axis
-      THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 )
-      // create a scene and a camera
-      scene = new THREE.Scene()
-      scene.background = new THREE.Color(0xb7312c);
-      var aspect = window.innerWidth / window.innerHeight;
-      var d = 30;
-      camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 1000 );
-      camera.position.set( -20, 20, 20 ); // all components equal
-      camera.lookAt( scene.position ); // or the origin
-  
+    // Rhino models are z-up, so set this as the default
+    THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
 
+    // create a scene and a camera
+    scene = new THREE.Scene()
+    scene.background = new THREE.Color(1, 1, 1)
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000)
+    camera.position.set(-1, -1, 1) // like perspective view
 
     // very light grey for background, like rhino
-    //scene.background = new THREE.Color(0xb7312c)
+    scene.background = new THREE.Color('whitesmoke')
 
     // create the renderer and add it to the html
     renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -91,28 +88,19 @@ function init() {
     // add some controls to orbit the camera
     controls = new OrbitControls(camera, renderer.domElement)
 
-      // add a directional light
-  const directionalLight = new THREE.DirectionalLight(0xffffff);
-  directionalLight.intensity =3;
-  scene.add(directionalLight);
+    // add a directional light
+    const directionalLight = new THREE.DirectionalLight( 0xffffff )
+    directionalLight.intensity = 2
+    scene.add( directionalLight )
 
-  const light = new THREE.AmbientLight( 0x404040 ); // soft white light
-  scene.add( light );
+    const ambientLight = new THREE.AmbientLight()
+    scene.add( ambientLight )
 
-  const hemiLight = new THREE.HemisphereLight( 0x404040 , 0x404040 ,3);
-  hemiLight.color.setHSL( 0.6, 1, 0.6 );
-  hemiLight.groundColor.setHSL( 0.095, 0.75, 1 );
-  hemiLight.position.set( 0, 0, 200 );
-  scene.add( hemiLight );
-
-      // add Screenshot listener
-      document.getElementById("shot").addEventListener('click', takeScreenshot);
-        // handle changes in the window size
+    // handle changes in the window size
     window.addEventListener( 'resize', onWindowResize, false )
 
     animate()
 }
-
 
 /**
  * Call appserver
@@ -146,6 +134,7 @@ async function compute() {
 function collectResults(responseJson) {
 
     const values = responseJson.values
+    console.log()
 
     // clear doc
     if( doc !== undefined)
@@ -153,7 +142,7 @@ function collectResults(responseJson) {
 
     //console.log(values)
     doc = new rhino.File3dm()
-
+    console.log(values)
     // for each output (RH_OUT:*)...
     for ( let i = 0; i < values.length; i ++ ) {
       // ...iterate through data tree structure...
@@ -161,18 +150,25 @@ function collectResults(responseJson) {
         const branch = values[i].InnerTree[path]
         // ...and for each branch...
         for( let j = 0; j < branch.length; j ++) {
-          
           // ...load rhino geometry into doc
           const rhinoObject = decodeItem(branch[j])
 
-                    //GET VALUES
-                    if (values[i].ParamName == "RH_OUT:area") {
-                      //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-                      area = Math.round(branch[j].data)
-          
-                      console.log(area)
-                    }
-                    //console.log(area)b
+
+          //GET VALUES
+          if (values[i].ParamName == "RH_OUT:area") {
+            //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+            area = Math.round(branch[j].data)
+
+            console.log(area)
+          }
+          //console.log(area)
+//GET VALUES
+if (values[i].ParamName == "RH_OUT:area2") {
+  //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+  area = Math.round(branch[j].data)
+
+  console.log(area2)
+}
 
 
           if (rhinoObject !== null) {
@@ -182,8 +178,12 @@ function collectResults(responseJson) {
       }
     }
 
+     //GET VALUES
+     document.getElementById('area').innerText = "Habitable Area = " + area + " m2"
+     document.getElementById('area2').innerText = "Price in MAD = " + area2  + " MAD"
 
-    
+
+
     if (doc.objects().count < 1) {
       console.error('No rhino objects to load!')
       showSpinner(false)
@@ -203,7 +203,6 @@ function collectResults(responseJson) {
         */
 
         // clear objects from scene. do this here to avoid blink
-        
         scene.traverse(child => {
             if (!child.isLight) {
                 scene.remove(child)
@@ -216,9 +215,9 @@ function collectResults(responseJson) {
         // hide spinner and enable download button
         showSpinner(false)
         downloadButton.disabled = false
-        shot.disabled = false
 
-       
+        // zoom to extents
+        zoomCameraToSelection(camera, controls, scene.children)
     })
 }
 
@@ -236,9 +235,7 @@ function decodeItem(item) {
     return rhino.CommonObject.decode(data)
   }
   return null
-  
 }
-
 
 /**
  * Called when a slider value changes in the UI. Collect all of the
@@ -270,18 +267,10 @@ function onSliderChange () {
 /**
  * The animation loop!
  */
- function animate() {
-  requestAnimationFrame(animate);
-  scene.traverse(function(child){
-    if (child.isMesh){
-        child.rotation.z +=0.001
-        
-    }else{(child.isLine)
-      child.rotation.z +=0.001
-    }})
-    
-    
-  renderer.render(scene, camera);
+function animate() {
+  requestAnimationFrame( animate )
+  controls.update()
+  renderer.render(scene, camera)
 }
 
 /**
@@ -290,10 +279,45 @@ function onSliderChange () {
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
-  renderer.setSize( window.innerWidth, window.innerHeight )
+  /* renderer.setSize( window.innerWidth, window.innerHeight ) */
   animate()
 }
 
+/**
+ * Helper function that behaves like rhino's "zoom to selection", but for three.js!
+ */
+function zoomCameraToSelection( camera, controls, selection, fitOffset = 1.2 ) {
+  
+  const box = new THREE.Box3();
+  
+  for( const object of selection ) {
+    if (object.isLight) continue
+    box.expandByObject( object );
+  }
+  
+  const size = box.getSize( new THREE.Vector3() );
+  const center = box.getCenter( new THREE.Vector3() );
+  
+  const maxSize = Math.max( size.x, size.y, size.z );
+  const fitHeightDistance = maxSize / ( 2 * Math.atan( Math.PI * camera.fov / 360 ) );
+  const fitWidthDistance = fitHeightDistance / camera.aspect;
+  const distance = fitOffset * Math.max( fitHeightDistance, fitWidthDistance );
+  
+  const direction = controls.target.clone()
+    .sub( camera.position )
+    .normalize()
+    .multiplyScalar( distance );
+  controls.maxDistance = distance * 10;
+  controls.target.copy( center );
+  
+  camera.near = distance / 100;
+  camera.far = distance * 100;
+  camera.updateProjectionMatrix();
+  camera.position.copy( controls.target ).sub(direction);
+  
+  controls.update();
+  
+}
 
 /**
  * This function is called when the download button is clicked
@@ -311,18 +335,6 @@ function download () {
     link.click()
 }
 
-//Screenshot
-function takeScreenshot() {
-
-  renderer.render(scene, camera);
-  renderer.domElement.toBlob(function(blob){
-    var b = document.createElement('a');
-    var url = URL.createObjectURL(blob);
-    b.href = url;
-    b.download = 'maison.png';
-    b.click();
-  }, 'image/png', 20.0);
-}
 /**
  * Shows or hides the loading spinner
  */
@@ -332,3 +344,4 @@ function showSpinner(enable) {
   else
     document.getElementById('loader').style.display = 'none'
 }
+

@@ -14,7 +14,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'MMM212_22.gh',
+  definition: 'MMM212_24.gh',
   inputs: getInputs()
 }
 

@@ -14,12 +14,16 @@
 - **Change Width**
 - **Change Number of floors**
 - **Number of Facades**
-
-## Input Parameters
-- WouldLiketoHave Plugins: Wombat, Shapediver, Pufferfish, Parakeet, Squid, Human.
+- **Plot Price per m²**
+- **Shell Structure price per m²**
+- **Interior Finishing price per m²**
+- **Desired selling price per m²**
 
 ## Archives and documentation.
 - Please visit our instagram page [instagram](https://www.instagram.com/mmmmmmmmmaison/)
 - Website in Progress @ https://www.mmm.house
 
-- ![alt text](mmmcapture.jpg)
+This was made during the course of Cloud Based Data Management @ IAAC, BIMSC21 
+- Tutors: David Andrés León, Hesham Shawqy.
+
+- Website for APP : https://maisonmarocainemoderne.herokuapp.com/examples/MMM_FINAL/

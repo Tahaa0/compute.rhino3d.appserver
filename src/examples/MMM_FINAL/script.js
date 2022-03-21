@@ -1,4 +1,4 @@
-/* eslint no-undef: "off", no-unused-vars: "off" */
+//LOADING THE THREEJS LIBRAIRIES AND THE 3DM LOADER FROM THE URL
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.126.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/controls/OrbitControls.js";
 import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/loaders/3DMLoader.js";
@@ -12,7 +12,7 @@ import rhino3dm from "https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm
 const loader = new Rhino3dmLoader();
 loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+//Constant
 const data = {
   definition: 'MMM212_24.gh',
   inputs: getInputs()
@@ -59,7 +59,7 @@ downloadButton.onclick = download
   return inputs
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
-// more globals
+// more globals / variables
 let scene, camera, renderer, controls, area, price, price1, price2, price3; //sunpos ,stats;
  /**
   * Sets up the scene, camera, renderer, lights and controls and starts the animation

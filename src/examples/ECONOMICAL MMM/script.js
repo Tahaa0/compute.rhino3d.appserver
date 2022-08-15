@@ -14,7 +14,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 //Constant
 const data = {
-  definition: 'clustered2.gh',
+  definition: 'economicalmmm3.gh',
   inputs: getInputs()
 }
 
@@ -61,7 +61,7 @@ downloadButton.onclick = download
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // more globals / variables
-let scene, camera, renderer, controls, area, price, price1, price2, price3, brick, concrete; //sunpos ,stats;
+let scene, camera, renderer, controls, roi //sunpos ,stats;
  /**
   * Sets up the scene, camera, renderer, lights and controls and starts the animation
   */
@@ -177,48 +177,7 @@ for (const path in values[i].InnerTree) {
     const rhinoObject = decodeItem(branch[j])
 
          //GET VALUES
-        if (values[i].ParamName == "RH_OUT:area") {
-          //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          area = Math.round(branch[j].data)
-         
-          console.log(area)
-        }
 
-        if (values[i].ParamName == "RH_OUT:price") {
-          //price = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          price = Math.round(branch[j].data)
-          console.log(price)
-        }  
-
-        if (values[i].ParamName == "RH_OUT:price1") {
-          //price = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          price1 = Math.round(branch[j].data)
-          console.log(price1)
-        }  
-
-        if (values[i].ParamName == "RH_OUT:price2") {
-          //price = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          price2 = Math.round(branch[j].data)
-          console.log(price2)
-        }  
-
-        if (values[i].ParamName == "RH_OUT:price3") {
-          //price3 = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          price3 = Math.round(branch[j].data)
-          console.log(price3)
-        }  
-
-        if (values[i].ParamName == "RH_OUT:brick") {
-          //price3 = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          brick = Math.round(branch[j].data)
-          console.log(brick)
-        }
-
-        if (values[i].ParamName == "RH_OUT:concrete") {
-          //price3 = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          concrete = Math.round(branch[j].data)
-          console.log(concrete)
-        }
 
         if (rhinoObject !== null) {
           doc.objects().add(rhinoObject, null)
@@ -229,13 +188,13 @@ for (const path in values[i].InnerTree) {
 }
 
 //GET VALUES
-document.getElementById('area').innerText = "Habitable Surface  = " + area + " m²"
-document.getElementById('price').innerText = " Construction Price  = " + price + " MAD"
-document.getElementById('price1').innerText = " Selling Price  = " + price1 + " MAD"
-document.getElementById('price2').innerText = " Investment Benefit = " + price2 + " MAD"
-document.getElementById('price3').innerText = " Benefit Pourcentage = " + price3 + " %"
-document.getElementById('brick').innerText = " Number Of Bricks = " + brick 
-document.getElementById('concrete').innerText = " Concrete Volume = " + concrete + " m³"
+//document.getElementById('area').innerText = "Habitable Surface  = " + area + " m²"
+//document.getElementById('price').innerText = " Construction Price  = " + price + " MAD"
+//document.getElementById('price1').innerText = " Selling Price  = " + price1 + " MAD"
+//document.getElementById('price2').innerText = " Investment Benefit = " + price2 + " MAD"
+//document.getElementById('price3').innerText = " Benefit Pourcentage = " + price3 + " %"
+//document.getElementById('brick').innerText = " Number Of Bricks = " + brick 
+//document.getElementById('concrete').innerText = " Concrete Volume = " + concrete + " m³"
 
 
 //GET VALUES

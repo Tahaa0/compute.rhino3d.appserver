@@ -83,41 +83,8 @@ padding: 5px;
      }
 
 
- #area{ 
+ #roi{ 
    color: rgb(49, 192, 180);
    background-color:rgb(255, 255, 255);
   }
-  #price{ 
-    color: rgb(49, 192, 180);
-    background-color:rgb(255, 255, 255);
-   }
-   #price1{ 
-    color: rgb(49, 192, 180);
-    background-color:rgb(255, 255, 255);
-
-   }
-   #price2{ 
-    color: rgb(221, 0, 0);
-    background-color:rgb(255, 255, 255);
-    font-weight: bold;
-
-   }
-
-   #price3{ 
-    color: rgb(47, 0, 255);
-    background-color:rgb(255, 255, 255);
-
-   }
-
-   #brick{ 
-    color: rgb(47, 0, 255);
-    background-color:rgb(255, 255, 255);
-
-   }
-
-   #concrete{ 
-    color: rgb(47, 0, 255);
-    background-color:rgb(255, 255, 255);
-
-   }
  

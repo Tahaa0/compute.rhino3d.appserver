@@ -14,7 +14,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 //Constant
 const data = {
-  definition: 'economicalmmm3.gh',
+  definition: 'economicalmmm6.gh',
   inputs: getInputs()
 }
 
@@ -312,14 +312,14 @@ function onSliderChange () {
  function animate() {
   scene.traverse(function(child){
     if (child.isMesh){
-      child.rotation.z +=0.001
+      child.rotation.z +=0.000
     }
     //else{(child.ispoint)
       //child.rotation.y +=0.0008
       //child.rotation.z +=0.0008
       //child.rotation.x +=0.0008      }
     else{(child.isLine)
-      child.rotation.z +=0.001
+      child.rotation.z +=0.000
     }})
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
@@ -338,7 +338,7 @@ function onSliderChange () {
  /**
   * Helper function that behaves like rhino's "zoom to selection", but for three.js!
   */
-  function zoomCameraToSelection( camera, controls, selection, fitOffset = 2.5 ) {
+  function zoomCameraToSelection( camera, controls, selection, fitOffset = 1 ) {
    
    const box = new THREE.Box3();
    

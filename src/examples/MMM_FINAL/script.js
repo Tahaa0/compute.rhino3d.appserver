@@ -19,6 +19,37 @@ const data = {
 }
 
 let rhino, doc;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// more globals
+let scene, camera, renderer, controls, area, price, price1, price2, price3; //sunpos ,stats;
+ /**
+  * Sets up the scene, camera, renderer, lights and controls and starts the animation
+  */
+
+ ///////////////////////////////////////////////////////////////////////////////////////////////////////
+ //lighting //
+  /*const params = {
+  shadows: true,
+  exposure: 0.68,
+  Power: [110000* 4 ],
+};
+const bulbGeometry = new THREE.SphereGeometry( 0.02, 16, 8 );
+        bulbLight = new THREE.PointLight( 0xffee88, 1, 100, 2 );
+
+        bulbMat = new THREE.MeshStandardMaterial( {
+          emissive: 0xffffee,
+          emissiveIntensity: 1,
+          color: 0x000000
+        } );
+        bulbLight.add( new THREE.Mesh( bulbGeometry, bulbMat ) );
+        bulbLight.position.set( 0, 2, 0 );
+        bulbLight.castShadow = true;
+        scene.add( bulbLight );
+                  */
+  
+ ////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
 rhino3dm().then(async (m) => {
   console.log("Loaded rhino3dm.");
   rhino = m; // global
@@ -58,35 +89,7 @@ downloadButton.onclick = download
   }
   return inputs
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////
-// more globals
-let scene, camera, renderer, controls, area, price, price1, price2, price3; //sunpos ,stats;
- /**
-  * Sets up the scene, camera, renderer, lights and controls and starts the animation
-  */
 
- ///////////////////////////////////////////////////////////////////////////////////////////////////////
- //lighting //
-  /*const params = {
-  shadows: true,
-  exposure: 0.68,
-  Power: [110000* 4 ],
-};
-const bulbGeometry = new THREE.SphereGeometry( 0.02, 16, 8 );
-				bulbLight = new THREE.PointLight( 0xffee88, 1, 100, 2 );
-
-				bulbMat = new THREE.MeshStandardMaterial( {
-					emissive: 0xffffee,
-					emissiveIntensity: 1,
-					color: 0x000000
-				} );
-				bulbLight.add( new THREE.Mesh( bulbGeometry, bulbMat ) );
-				bulbLight.position.set( 0, 2, 0 );
-				bulbLight.castShadow = true;
-				scene.add( bulbLight );
-                  */
-  
- ////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
  /////////////////////////////////////////////////////////////////////////////////////////////////////
  // camera path// 

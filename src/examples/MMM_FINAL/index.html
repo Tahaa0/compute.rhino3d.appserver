@@ -1,102 +1,298 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="icon" href="data:,">
-        <title>MMMMMMMMMMMMMMMMMMMMMM</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    </head>
-    <body>
-      </div>
-        <div id="loader"></div> 
-        <div id="container">
-            <div id="overlay">
-              <h1>Maison Marocaine Moderne </h1>
-                <p>The "Moroccan Modern House" <strong>MMM</strong> constitues 75% of the urban landscape in Morocco.</p>
-                  <p>These typologies are growing in an accelerating rate that it is almost impossible to trace their evolution.</p>
-                  <p>Due to its good economical return in investment, the MMM represents a socio-economical ladder for the Moroccan middle-class population.</p>
-                  <p>This app is an MMM Generator. It calculates the basic return of investment based on the defined plot size, the envelope price, and interior finishing in m².</p>
-
-                  <div class="bar">
-                    <label for="Land Price /m²">Land Price</label>
-                    </div>
-                      <div class="bar">
-                      <input type="range" id="Land Price /m²" name="Land Price /m²" min="500" max="20000" value="4000" oninput="rangeValue4.innerText= this.value" step="100"class="slider">
-                      <p id="rangeValue4">4000 </p><p>MAD / m² </p>
-                      </div>
-
-                <div class="bar">
-                  <label for="Structure Shell Price /m²">Structure Shell Price /m²</label>
-                </div>
-
-                <div class="bar">
-                  <input type="range" id="Structure Shell Price /m²" name="Structure Shell Price /m²" min="800" max="2000" value="1000" oninput="rangeValue5.innerText= this.value" step="50"class="slider">
-                  <p id="rangeValue5">1000</p><p> MAD / m²</p>
-                  </div>
-
-                  <div class="bar">
-                    <label for="Interior Finishing Price /m²">Interior Finishing Price /m²</label>
-                  </div>
-
-                  <div class="bar">
-                    <input type="range" id="Interior Finishing Price /m²" name="Interior Finishing Price /m²" min="1500" max="6000" value="2000" oninput="rangeValue12.innerText= this.value" step="100"class="slider">
-                    <p id="rangeValue12">2000</p><p> MAD / m²</p>
-                    </div>
-
-                    <div class="bar">
-                      <label for="Selling Price/m²">Selling Price/m²</label>
-                    </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMM</title>
+  <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="style.css">
+    <script>
+    $( function() {
+      var handle = $( "#custom-handle" );
+      $( "#slider" ).slider({
+        value:2022,
+        min: 2020,
+        max: 2050,
+        step: 1,
+        create: function() {
+          handle.html("<span id='texthandle'>"+$( this ).slider( "value" )+"</span>");
+        },
+        slide: function( event, ui ) {
+          handle.html("<span id='texthandle'>"+ui.value+"</span>");
+          if(Math.random()>0.3){
+            $( "#investment" ).html( "+" + parseInt(2000*333*Math.random()) ).removeClass('red').addClass('green');
+          }else{
+            $( "#investment" ).html( "-" + parseInt(2000*333*Math.random()) ).removeClass('green').addClass('red');
+          }
+          
+        }
+      });
+  function selectRandomState(){
+    if(Math.random()>0.666){
+      return 'rent';
+    }else{
+      if(Math.random()>0.5){
+        return 'live';
+      }else{
+        return 'sell';
+      }
+    }
+  }
+  function regenerate(){
+    $('.scenario').html('');
+    $('.scenario').each(function(e){
+      $(this).append('<div class="'+selectRandomState()+'""></div>');
+      $(this).append('<div class="'+selectRandomState()+'""></div>');
+      $(this).append('<div class="'+selectRandomState()+'""></div>');
+    });
+  }
   
-                    <div class="bar">
-                      <input type="range" id="Selling Price/m²" name="Selling Price/m²" min="4000" max="20000" value="4000" oninput="rangeValue114.innerText= this.value" step="100"class="slider">
-                      <p id="rangeValue114">4000</p><p> MAD / m²</p>
-                      </div>
+  $('.scenario').click(function(e){
+    $('.scenario').removeClass('selected');
+    $(this).addClass('selected');
+    if(Math.random()>0.3){
+          $( "#investment" ).html( "+" + parseInt(2000*333*Math.random()) ).removeClass('red').addClass('green');
+        }else{
+          $( "#investment" ).html( "-" + parseInt(2000*333*Math.random()) ).removeClass('green').addClass('red');
+        }
+  });
+  regenerate();
+  $('#regenerate').click(regenerate);
+    } );
+  </script>
+  <style>
+    *{
+      font-family: 'Montserrat';
+    }
+    #main{
+      height: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-bottom: 50px;
+      margin-top: 40px;
+      text-align: center;
+      color: #666;
+    }
+    #container{
+      padding-bottom: 80px;
+    }
+    #slider.ui-slider{
+      border: 0;
+      background-color: #A5AAB4;
+      height: 6px;
+    }
+    #slider>.ui-slider-handle{
+      border: 0;
+      background: #444;
+      width: 9px;
+      height: 36px;
+      top:-13.5px;
+      border-radius: 0;
+    }
+    #texthandle{
+      display: block;
+      margin-top: -27px;
+    margin-left: -21px;
+    width: 55.5px;
+    text-align: center;
+    }
+    #investment{
+      font-family: 'Montserrat';
+      font-size: 30px;
+      text-align: center;
+      font-weight: 400;
+      
+      width: 250px;
+      border-radius: 6px;
+      margin: 0 auto;
+      margin-top: 30px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+    }
+    #investment.green{
+      color: #11B3A8;
+      background-color: rgb(17, 179, 168,0.13);
+    }
+    #investment.red{
+      color: #F17D70;
+      background-color: rgb(241, 125, 112, 0.13)
+    }
+    .row{
+      display: flex;
+      justify-content: space-around;
+      width: 500px;
+      margin: 0 auto;
+    }
+    .scenario{
+      background-color: rgb(0,0,0,0.5);
+      border-radius: 100%;
+      height: 50px;
+      width: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+    .scenario:hover{
+      background-color: rgb(0,0,0,0.65);
+    }
+    .scenario>div{
+      width: 24px;
+      height: 8px;
+      background-color: white;  
+    }
+    div.rent{
+      background-color: #8EC5F0;
+    }
+    div.live{
+      background-color: #DFEB98;
+    }
+    div.sell{
+      background-color: #E578A9;
+    }
+    .scenario.selected{
+      background-color: rgb(00,00,0,0.75);
+    }
+    #regenerate{
+      width: 200px;
+      margin-top: -50px;
+      
+      cursor: pointer;
+    }
+    .color{
+      display: flex;
+      align-items: center;
+      margin-top: 4px;  
+      margin-bottom: 4px;
+    }
+    .colorbox{
+      width: 30px;
+      height: 30px;
+      border: 2px solid #666;
+    }
+    .color>.text{
+      margin-left: 10px;  
+    }
+    #colors{
+      margin-bottom: -200px;
+      margin-top: 100px;    
+    }
+    #back{
+      margin-top: 20px;
+      width: 120px;
+      background-color: #303234;
+      color: #FFF !important  ;
+      border-radius: 6px;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: -40px;
+      margin-left: 20px;    
+    }
+    #back>a{
+      color: #FFF !important  ;
+    }
+  </style>
+</head>
+<body>
+  <a href="/"><div id="back">Back</div></a>
+  <div id="container" class="wrapper">
 
-                  <div class="bar">
-                    <label for="Number of Floors">Number of Floors</label>
-                    <input type="range" id="Number of Floors" name="Number of Floors" min="1" max="6" value="1" oninput="rangeValue7.innerText= this.value" step="1"class="slider">
-                    <p id="rangeValue7">2</p>
-                  </div>
-
-                <div class="bar">
-                  <label for="Depth">Depth</label>
-                  <input type="range" id="Depth" name="Depth" min="7" max="20" value="7" oninput="rangeValue.innerText= this.value" step="1"class="slider">
-                  <p id="rangeValue">7</p>
-                </div>
-
-                <div class="bar">
-                  <label for="Length">Length</label>
-                  <input type="range" id="Length" name="Length" min="7" max="20" value="7" oninput="rangeValue1.innerText= this.value" step="1"class="slider">
-                  <p id="rangeValue1">7</p>
-                </div>
-
-                <div class="bar">
-                  <label for="Number of Façades">Number of Façades</label>
-                  <input type="range" id="Number of Façades" name="Number of Façades" min="1" max="4" value="1" oninput="rangeValue2.innerText= this.value" step="1"class="slider">
-                  <p id="rangeValue2">1</p>
-                </div>
-
-                <div class="bar">
-                  <label for="Structure Span">Structure Span</label>
-                  <input type="range" id="Structure Span" name="Structure Span" min="3" max="6" value="3" oninput="rangeValue3.innerText= this.value" step="1"class="slider">
-                  <p id="rangeValue3">3</p>
-                </div>
-               
-                <div id="area" > Habitable Surface</div>
-                <div id="price" >Construction Price </div>
-                <div id="price1" >Selling Price </div>
-                <div id="price2" >Investment Benefit</div>
-                <div id="price3" >Benefit Pourcentage</div>
-
-                <p> <strong> Download Rhino File</strong></p>
-                <div><button id="downloadButton" disabled>Download</button></div>
-                </div>
-
-        </div>
-
-        <script type="module" src="./script.js"> 
-        </script>
-    </body>
+    <div id="colors">
+      <div class="color"> 
+        <div class="colorbox live"></div>
+        <div class="text">Live</div>
+      </div>
+      <div class="color"> 
+        <div class="colorbox rent"></div>
+        <div class="text">Rent</div>
+      </div>
+      <div class="color"> 
+        <div class="colorbox sell"></div>
+        <div class="text">Sell</div>
+      </div>
+    </div>
+    <div id="main">
+      <!--<div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>
+      <div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>
+      <div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>
+      <div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>
+      <div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>
+      <div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>
+      <div class="row">
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+        <div class="scenario"></div>
+      </div>-->
+      3JS Model
+  </div>
+  <div id="slider">
+        <div id="custom-handle" class="ui-slider-handle"></div>
+    </div>
+    <div id="investment" class="green">+121203</div>
+    <div id="regenerate">Years of investment</div>
+    
+<script></script>
+</body>
 </html>

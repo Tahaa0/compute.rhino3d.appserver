@@ -59,8 +59,8 @@ rhino3dm().then(async (m) => {
 
 //let previousShadowMap = false;
 //downloadButton
-const downloadButton = document.getElementById("downloadButton")
-downloadButton.onclick = download
+/*const downloadButton = document.getElementById("downloadButton")
+downloadButton.onclick = download*/
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
  * Gets <input> elements from html and sets handlers
@@ -219,12 +219,12 @@ for (const path in values[i].InnerTree) {
 }
 
 //GET VALUES
-document.getElementById('area').innerText = "Habitable Surface  = " + area + " m²"
+/*document.getElementById('area').innerText = "Habitable Surface  = " + area + " m²"
 document.getElementById('price').innerText = " Construction Price  = " + price + " MAD"
 document.getElementById('price1').innerText = " Selling Price  = " + price1 + " MAD"
 document.getElementById('price2').innerText = " Investment Benefit = " + price2 + " MAD"
 document.getElementById('price3').innerText = " Benefit Pourcentage = " + price3 + " %"
-
+*/
 //GET VALUES
 
  

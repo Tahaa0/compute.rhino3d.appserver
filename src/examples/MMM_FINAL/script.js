@@ -22,7 +22,8 @@ let rhino, doc;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // more globals
-let scene, camera, renderer, controls, area, price, price1, price2, price3; //sunpos ,stats;
+
+var scene, camera, renderer, controls, area, price, price1, price2, price3; //sunpos ,stats;
  /**
   * Sets up the scene, camera, renderer, lights and controls and starts the animation
   */

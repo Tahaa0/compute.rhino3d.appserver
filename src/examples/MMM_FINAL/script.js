@@ -102,7 +102,7 @@ var sceneContainer =  document.getElementById('main');
     // create a scene and a camera
     scene = new THREE.Scene()
     scene.background = new THREE.Color(0, 99, 1)
-    camera = new THREE.PerspectiveCamera(10, sceneContainer.innerWidth / sceneContainer.innerHeight, 1, 1000)
+    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 1000)
     camera.position.set(1, -1, 1) // like perspective view
 
     // very light grey for background, like rhino
@@ -359,7 +359,7 @@ function onSliderChange () {
 * Shows or hides the loading spinner
 */
  function onWindowResize() {
-   camera.aspect = sceneContainer.innerWidth / sceneContainer.innerHeight;
+   camera.aspect = window.innerWidth / window.innerHeight;
    camera.updateProjectionMatrix();
    renderer.setSize(sceneContainer.innerWidth, sceneContainer.innerHeight);
    animate();

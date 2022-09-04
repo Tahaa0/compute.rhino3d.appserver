@@ -106,7 +106,7 @@ var sceneContainer =  document.getElementById('main');
     camera.position.set(1, -1, 1) // like perspective view
 
     // very light grey for background, like rhino
-    scene.background = null;
+    scene.background = new THREE.Color('#F1F0EB');
 
 
     

@@ -113,7 +113,7 @@ var sceneContainer =  document.getElementById('main');
     // create the renderer and add it to the html
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio( window.devicePixelRatio )
-    renderer.setSize(sceneContainer.innerWidth, sceneContainer.innerHeight)
+    renderer.setSize(window.innerWidth, window.innerHeight)
     sceneContainer.appendChild(renderer.domElement)
 
     // add some controls to orbit the camera
@@ -361,7 +361,7 @@ function onSliderChange () {
  function onWindowResize() {
    camera.aspect = window.innerWidth / window.innerHeight;
    camera.updateProjectionMatrix();
-   renderer.setSize(sceneContainer.innerWidth, sceneContainer.innerHeight);
+   renderer.setSize(window.innerWidth, window.innerHeight);
    animate();
  }
  

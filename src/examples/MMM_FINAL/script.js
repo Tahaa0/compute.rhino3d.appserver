@@ -416,8 +416,8 @@ function onSliderChange () {
      link.click()
  }
  function showSpinner(enable) {
-  if (enable)
-    //document.getElementById('loader').style.display = 'block'
+  /*if (enable)
+    document.getElementById('loader').style.display = 'block'
   else
-    //document.getElementById('loader').style.display = 'none'
+    document.getElementById('loader').style.display = 'none'*/
 }

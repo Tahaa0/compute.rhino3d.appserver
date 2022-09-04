@@ -90,7 +90,7 @@ downloadButton.onclick = download*/
   return inputs
 }
 
-
+var sceneContainer =  document.getElementById('main');
  /////////////////////////////////////////////////////////////////////////////////////////////////////
  // camera path// 
  ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,18 +98,18 @@ downloadButton.onclick = download*/
  
     // Rhino models are z-up, so set this as the default
     THREE.Object3D.DefaultUp = new THREE.Vector3( 0, 0, 1 );
-
+    
     // create a scene and a camera
     scene = new THREE.Scene()
     scene.background = new THREE.Color(0, 99, 1)
-    camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 1, 1000)
+    camera = new THREE.PerspectiveCamera(10, sceneContainer.innerWidth / sceneContainer.innerHeight, 1, 1000)
     camera.position.set(1, -1, 1) // like perspective view
 
     // very light grey for background, like rhino
     scene.background = new THREE.Color('transparent')
 
 
-    var sceneContainer =  document.getElementById('main');
+    
     // create the renderer and add it to the html
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio( window.devicePixelRatio )
@@ -359,10 +359,10 @@ function onSliderChange () {
 * Shows or hides the loading spinner
 */
  function onWindowResize() {
- camera.aspect = window.innerWidth / window.innerHeight;
- camera.updateProjectionMatrix();
- renderer.setSize(window.innerWidth, window.innerHeight);
- animate();
+   camera.aspect = sceneContainer.innerWidth / sceneContainer.innerHeight;
+   camera.updateProjectionMatrix();
+   renderer.setSize(sceneContainer.innerWidth, sceneContainer.innerHeight);
+   animate();
  }
  
  /**

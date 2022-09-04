@@ -106,13 +106,13 @@ downloadButton.onclick = download*/
     camera.position.set(1, -1, 1) // like perspective view
 
     // very light grey for background, like rhino
-    scene.background = new THREE.Color('whitesmoke')
+    scene.background = new THREE.Color('transparent')
 
     // create the renderer and add it to the html
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio( window.devicePixelRatio )
     renderer.setSize(window.innerWidth, window.innerHeight)
-    document.body.appendChild(renderer.domElement)
+    document.getElementById('main').appendChild(renderer.domElement)
 
     // add some controls to orbit the camera
     controls = new OrbitControls(camera, renderer.domElement)

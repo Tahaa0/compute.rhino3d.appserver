@@ -287,7 +287,7 @@ loader.parse(buffer, function (object) {
 
 // hide spinner and enable download button
 showSpinner(false)
-downloadButton.disabled = false
+//downloadButton.disabled = false
 // zoom to extents
   zoomCameraToSelection(camera, controls, scene.children)
 });

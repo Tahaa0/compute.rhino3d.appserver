@@ -292,7 +292,7 @@ loader.parse(buffer, function (object) {
   scene.add(object);
 
 
-new_material = new THREE.MeshLambertMaterial
+var new_material = new THREE.MeshLambertMaterial
   opacity: 0.85
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement)

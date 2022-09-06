@@ -292,8 +292,7 @@ loader.parse(buffer, function (object) {
   scene.add(object);
 
 
-var new_material = new THREE.MeshLambertMaterial
-  opacity: 0.85
+
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
@@ -301,11 +300,10 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
     if (child.isMesh) {
       console.log(child);
       domEvents.addEventListener(child, 'mouseover', function(event){
-        new_material.color = child.material.color
-        child.material = new_material
+        child.material.opacity = 0.85;
       }, false)
       domEvents.addEventListener(child, 'mouseout', function(event){
-        child.material = materials[child.uuid]
+        child.material.opacity = 1;
       }, false)
     }
   });

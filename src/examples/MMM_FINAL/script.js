@@ -309,9 +309,11 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
       domEvents.addEventListener(child, 'mouseover', function(event){
         new_material.color = child.material.color
         child.material = new_material
+        document.body.style.cursor = "pointer";
       }, false)
       domEvents.addEventListener(child, 'mouseout', function(event){
         child.material = materials[child.uuid]
+        document.body.style.cursor = "auto";
       }, false)
     }
   });

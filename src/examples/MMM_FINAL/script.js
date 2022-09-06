@@ -258,7 +258,6 @@ loader.parse(buffer, function (object) {
   // materials //
   // brep
    object.traverse((child) => {
-    console.log(child);
     if (child.isMesh) {
         const mat = new THREE.MeshNormalMaterial(( { side: THREE.DoubleSide } ))
         child.material = mat;
@@ -290,12 +289,25 @@ loader.parse(buffer, function (object) {
   // add object graph from rhino model to three.js scene
   scene.add(object);
 
+
+
+var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
+
+scene.traverse((child) => {
+    if (child.isMesh) {
+      domEvents.addEventListener(child, 'mouseover', function(event){
+        console.log('Mouseover on mesh');
+      }, false)
+    }
+  });
+
 // hide spinner and enable download button
 showSpinner(false)
 //downloadButton.disabled = false
 // zoom to extents
   zoomCameraToSelection(camera, controls, scene.children)
 });
+
 }
 
 /**

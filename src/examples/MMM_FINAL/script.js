@@ -292,6 +292,8 @@ loader.parse(buffer, function (object) {
   scene.add(object);
 
 
+new_material = new THREE.MeshLambertMaterial
+  opacity: 0.85
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
@@ -299,7 +301,11 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
     if (child.isMesh) {
       console.log(child);
       domEvents.addEventListener(child, 'mouseover', function(event){
-        console.log('Mouseover on mesh');
+        new_material.color = child.material.color
+        child.material = new_material
+      }, false)
+      domEvents.addEventListener(child, 'mouseout', function(event){
+        child.material = materials[child.uuid]
       }, false)
     }
   });

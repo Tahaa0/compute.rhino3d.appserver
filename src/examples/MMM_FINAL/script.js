@@ -5,6 +5,7 @@ import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examp
 import rhino3dm from "https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js";
 import * as THREEx from "./threex.domevents.js";
 
+console.log(THREEx);
 //import Stats from './jsm/libs/stats.module.js';
 //import { GUI } from './jsm/libs/lil-gui.module.min.js';
 

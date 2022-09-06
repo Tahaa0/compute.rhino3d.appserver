@@ -291,19 +291,27 @@ loader.parse(buffer, function (object) {
   // add object graph from rhino model to three.js scene
   scene.add(object);
 
-
-
+var materials = {}
+var new_material = new THREE.MeshLambertMaterial
+  opacity: 0.85
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
   scene.traverse((child) => {
+    
+    if child.material.type == "MeshFaceMaterial"
+      child.material = child.material.materials[1]
+    
+    materials[child.uuid] = child.material
+
     if (child.isMesh) {
       console.log(child);
       domEvents.addEventListener(child, 'mouseover', function(event){
-        child.material.opacity = 0.85;
+        new_material.color = child.material.color
+        child.material = new_material
       }, false)
       domEvents.addEventListener(child, 'mouseout', function(event){
-        child.material.opacity = 1;
+        child.material = materials[child.uuid]
       }, false)
     }
   });

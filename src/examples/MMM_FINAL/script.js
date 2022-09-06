@@ -293,8 +293,9 @@ loader.parse(buffer, function (object) {
 
 var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
-scene.traverse((child) => {
+  scene.traverse((child) => {
     if (child.isMesh) {
+      console.log(child);
       domEvents.addEventListener(child, 'mouseover', function(event){
         console.log('Mouseover on mesh');
       }, false)

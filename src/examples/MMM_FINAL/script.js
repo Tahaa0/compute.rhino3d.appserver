@@ -4,7 +4,7 @@ import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.126.0/exampl
 import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/loaders/3DMLoader.js";
 import rhino3dm from "https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js";
 
-import THREEx from "threex.domevents.js";
+import THREEx from "/threex.domevents.js";
 
 console.log(THREEx);
 //import Stats from './jsm/libs/stats.module.js';

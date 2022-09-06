@@ -245,7 +245,7 @@ const buffer = new Uint8Array(doc.toByteArray()).buffer;
 loader.parse(buffer, function (object) {
   // clear objects from scene
   scene.traverse((child) => {
-    console.log(child);
+
     if (
       child.userData.hasOwnProperty("objectType") &&
       child.userData.objectType === "File3dm"
@@ -258,6 +258,7 @@ loader.parse(buffer, function (object) {
   // materials //
   // brep
    object.traverse((child) => {
+    console.log(child);
     if (child.isMesh) {
         const mat = new THREE.MeshNormalMaterial(( { side: THREE.DoubleSide } ))
         child.material = mat;

@@ -4,7 +4,6 @@ import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.126.0/exampl
 import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/loaders/3DMLoader.js";
 import rhino3dm from "https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js";
 
-console.log(THREEx);
 //import Stats from './jsm/libs/stats.module.js';
 //import { GUI } from './jsm/libs/lil-gui.module.min.js';
 
@@ -246,6 +245,7 @@ const buffer = new Uint8Array(doc.toByteArray()).buffer;
 loader.parse(buffer, function (object) {
   // clear objects from scene
   scene.traverse((child) => {
+    console.log(child);
     if (
       child.userData.hasOwnProperty("objectType") &&
       child.userData.objectType === "File3dm"

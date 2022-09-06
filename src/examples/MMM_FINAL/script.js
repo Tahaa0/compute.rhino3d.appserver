@@ -299,10 +299,10 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
 
   scene.traverse((child) => {
     
-    if child.material.type == "MeshFaceMaterial"
-      child.material = child.material.materials[1]
+    if(child.material.type == "MeshFaceMaterial")
+      child.material = child.material.materials[1];
     
-    materials[child.uuid] = child.material
+    materials[child.uuid] = child.material;
 
     if (child.isMesh) {
       console.log(child);

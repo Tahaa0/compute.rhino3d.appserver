@@ -276,7 +276,7 @@ if (doc.objects().count < 1) {
 console.log(arr);
 const buffer = new Uint8Array(doc.toByteArray()).buffer;
 
-loader.parse(buffer, function (object) {
+loader.parse(arr, function (object) {
   // clear objects from scene
   scene.traverse((child) => {
 
@@ -348,7 +348,6 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
         child.material = materials[child.uuid]
         document.body.style.cursor = "auto";
       }, false)
-      scene.remove(child);
     }
   });
 

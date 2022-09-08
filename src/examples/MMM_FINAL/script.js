@@ -17,7 +17,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'economicalmmm8.gh',
+  definition: 'economicalmmm6.gh',
   inputs: getInputs()
 }
 
@@ -186,8 +186,16 @@ function collectResults(responseJson) {
 doc = new rhino.File3dm()
 // for each output (RH_OUT:*)...
 for ( let i = 0; i < values.length; i ++ ) {
+  if (values[i].ParamName == "RH_OUT:docString") {
+          //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+          const str = values[i].InnerTree['{ 0; }'][0].data;
+          console.log(str);
+          const data = JSON.parse(str)
+          console.log(data);
+          const arr = _base64ToArrayBuffer(data);
+          console.log(arr);
+        }
 
-  
 // ...iterate through data tree structure...
 for (const path in values[i].InnerTree) {
   const branch = values[i].InnerTree[path]

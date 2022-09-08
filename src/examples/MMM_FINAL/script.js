@@ -206,7 +206,7 @@ for (const path in values[i].InnerTree) {
   for( let j = 0; j < branch.length; j ++) {
     // ...load rhino geometry into doc
     const rhinoObject = decodeItem(branch[j]);  
-
+     console.log(rhinoObject);
          //GET VALUES
         if (values[i].ParamName == "RH_OUT:area") {
           //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)

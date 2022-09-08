@@ -188,7 +188,7 @@ doc = new rhino.File3dm()
 for ( let i = 0; i < values.length; i ++ ) {
   if (values[i].ParamName == "RH_OUT:docString") {
           //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          const str = values[i].InnerTree['{ 0; }'][0].data;
+          const str = values[i].InnerTree['{0}'][0].data;
           console.log(str);
           const data = JSON.parse(str)
           console.log(data);

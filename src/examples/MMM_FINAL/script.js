@@ -17,7 +17,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'economicalmmm6.gh',
+  definition: 'economicalmmm6_docstringnew.gh',
   inputs: getInputs()
 }
 
@@ -275,7 +275,7 @@ if (doc.objects().count < 1) {
 // load rhino doc into three.js scene
 console.log(arr);
 const buffer = new Uint8Array(doc.toByteArray()).buffer;
-/*
+
 loader.parse(arr, function (object) {
   // clear objects from scene
   scene.traverse((child) => {
@@ -305,7 +305,7 @@ loader.parse(arr, function (object) {
         child.material = mat;
               
     }
-  });*//*
+  });*/
   //  crvs
   object.traverse((child) => {
     if (child.isLine) {
@@ -356,7 +356,7 @@ showSpinner(false)
 //downloadButton.disabled = false
 // zoom to extents
   zoomCameraToSelection(camera, controls, scene.children)
-});*/
+});
 
 loader.parse(arr, function (object) {
   scene.add(object);

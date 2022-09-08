@@ -194,6 +194,7 @@ for ( let i = 0; i < values.length; i ++ ) {
           console.log(data);
           const arr = _base64ToArrayBuffer(data);
           console.log(arr);
+          const obj = rhino.File3dm.fromByteArray(arr);
         }
 
 // ...iterate through data tree structure...

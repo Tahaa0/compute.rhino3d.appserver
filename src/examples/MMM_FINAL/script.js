@@ -17,7 +17,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'economicalmmm6.gh',
+  definition: 'economicalmmm6-02.gh',
   inputs: getInputs()
 }
 
@@ -195,7 +195,7 @@ for ( let i = 0; i < values.length; i ++ ) {
           console.log(data);
           arr = _base64ToArrayBuffer(data);
           console.log(arr);
-          obj = rhino.File3dm.fromByteArray(arr);
+          const obj = rhino.File3dm.fromByteArray(arr);
           console.log(obj);
         }
 

@@ -174,18 +174,23 @@ function collectResults(responseJson) {
 
 //console.log(values)
 doc = new rhino.File3dm()
-console.log(values)
 // for each output (RH_OUT:*)...
 for ( let i = 0; i < values.length; i ++ ) {
 // ...iterate through data tree structure...
-console.log(values[i]);
 for (const path in values[i].InnerTree) {
   const branch = values[i].InnerTree[path]
   // ...and for each branch...
   for( let j = 0; j < branch.length; j ++) {
     // ...load rhino geometry into doc
-    const rhinoObject = decodeItem(branch[j])
-    console.log(rhinoObject);
+    if(branch.type == "System.String"){
+      var data = JSON.parse(branch.data)
+      console.log(data);
+      var arr = _base64ToArrayBuffer(data);
+      console.log(arr);
+    }else{
+      const rhinoObject = decodeItem(branch[j]);  
+    }
+    
 
          //GET VALUES
         if (values[i].ParamName == "RH_OUT:area") {

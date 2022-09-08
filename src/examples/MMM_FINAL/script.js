@@ -266,6 +266,7 @@ if (doc.objects().count < 1) {
 
 // load rhino doc into three.js scene
 const buffer = new Uint8Array(doc.toByteArray()).buffer;
+console.log(buffer);
 loader.parse(buffer, function (object) {
   // clear objects from scene
   scene.traverse((child) => {

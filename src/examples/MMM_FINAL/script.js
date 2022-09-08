@@ -295,8 +295,7 @@ loader.parse(buffer, function (object) {
     if (child.isMesh) {
         const mat = new THREE.MeshNormalMaterial(( { side: THREE.DoubleSide } ))
         child.material = mat;
-        
-        object.remove(child);  
+
     }
   });
   // sunp
@@ -349,6 +348,7 @@ var domEvents = new THREEx.DomEvents(camera, renderer.domElement)
         child.material = materials[child.uuid]
         document.body.style.cursor = "auto";
       }, false)
+      scene.remove(child);
     }
   });
 

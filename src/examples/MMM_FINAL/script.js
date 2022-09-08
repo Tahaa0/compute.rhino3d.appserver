@@ -275,8 +275,8 @@ if (doc.objects().count < 1) {
 // load rhino doc into three.js scene
 console.log(arr);
 const buffer = new Uint8Array(doc.toByteArray()).buffer;
-var finalBuffer = _appendBuffer(buffer, arr);
-loader.parse(finalBuffer, function (object) {
+
+loader.parse(buffer, function (object) {
   // clear objects from scene
   scene.traverse((child) => {
 
@@ -356,6 +356,10 @@ showSpinner(false)
 //downloadButton.disabled = false
 // zoom to extents
   zoomCameraToSelection(camera, controls, scene.children)
+});
+
+loader.parse(arr, function (object) {
+  scene.add(object);
 });
 
 }

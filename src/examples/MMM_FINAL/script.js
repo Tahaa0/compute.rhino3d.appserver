@@ -174,6 +174,13 @@ function _base64ToArrayBuffer(base64) {
   return bytes.buffer;
 }
 
+var _appendBuffer = function(buffer1, buffer2) {
+  var tmp = new Uint8Array(buffer1.byteLength + buffer2.byteLength);
+  tmp.set(new Uint8Array(buffer1), 0);
+  tmp.set(new Uint8Array(buffer2), buffer1.byteLength);
+  return tmp.buffer;
+};
+
 function collectResults(responseJson) {
   const values = responseJson.values;
 
@@ -268,8 +275,8 @@ if (doc.objects().count < 1) {
 // load rhino doc into three.js scene
 console.log(arr);
 const buffer = new Uint8Array(doc.toByteArray()).buffer;
-console.log(buffer);
-loader.parse(arr, function (object) {
+var finalBuffer = _appendBuffer(buffer, arr);
+loader.parse(finalBuffer, function (object) {
   // clear objects from scene
   scene.traverse((child) => {
 

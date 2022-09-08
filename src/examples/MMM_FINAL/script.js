@@ -187,6 +187,7 @@ doc = new rhino.File3dm()
 // for each output (RH_OUT:*)...
 for ( let i = 0; i < values.length; i ++ ) {
 
+  
 // ...iterate through data tree structure...
 for (const path in values[i].InnerTree) {
   const branch = values[i].InnerTree[path]

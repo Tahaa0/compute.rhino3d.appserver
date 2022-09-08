@@ -187,6 +187,7 @@ for (const path in values[i].InnerTree) {
       console.log(data);
       var arr = _base64ToArrayBuffer(data);
       console.log(arr);
+      const rhinoObject = null;
     }else{
       const rhinoObject = decodeItem(branch[j]);  
     }

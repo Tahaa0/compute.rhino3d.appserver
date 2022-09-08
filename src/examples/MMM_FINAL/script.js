@@ -184,9 +184,10 @@ for (const path in values[i].InnerTree) {
     // ...load rhino geometry into doc
     var rhinoObject = {};
     if(branch.type == "System.String"){
+      console.log(branch.data);
       var data = JSON.parse(branch.data)
       console.log(data);
-      var arr = _base64ToArrayBuffer(data);
+      var arr = _base64ToArrayBuffer(branch.data);
       console.log(arr);
     }else{
       rhinoObject = decodeItem(branch[j]);  

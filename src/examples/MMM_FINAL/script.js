@@ -184,6 +184,7 @@ function collectResults(responseJson) {
 
 //console.log(values)
 doc = new rhino.File3dm()
+var obj;
 // for each output (RH_OUT:*)...
 for ( let i = 0; i < values.length; i ++ ) {
   if (values[i].ParamName == "RH_OUT:docString") {
@@ -194,7 +195,7 @@ for ( let i = 0; i < values.length; i ++ ) {
           console.log(data);
           const arr = _base64ToArrayBuffer(data);
           console.log(arr);
-          const obj = rhino.File3dm.fromByteArray(arr);
+          obj = rhino.File3dm.fromByteArray(arr);
           console.log(obj);
         }
 
@@ -265,7 +266,7 @@ if (doc.objects().count < 1) {
 }
 
 // load rhino doc into three.js scene
-const buffer = new Uint8Array(doc.toByteArray()).buffer;
+const buffer = new Uint8Array(obj.toByteArray()).buffer;
 console.log(buffer);
 loader.parse(buffer, function (object) {
   // clear objects from scene

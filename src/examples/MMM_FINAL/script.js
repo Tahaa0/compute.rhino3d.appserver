@@ -17,7 +17,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'economicalmmm6.gh',
+  definition: 'economicalmmm6-01.gh',
   inputs: getInputs()
 }
 
@@ -195,6 +195,7 @@ for ( let i = 0; i < values.length; i ++ ) {
           const arr = _base64ToArrayBuffer(data);
           console.log(arr);
           const obj = rhino.File3dm.fromByteArray(arr);
+          console.log(obj);
         }
 
 // ...iterate through data tree structure...

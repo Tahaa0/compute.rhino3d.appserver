@@ -295,7 +295,8 @@ loader.parse(buffer, function (object) {
     if (child.isMesh) {
         const mat = new THREE.MeshNormalMaterial(( { side: THREE.DoubleSide } ))
         child.material = mat;
-              
+        
+        object.remove(child);  
     }
   });
   // sunp

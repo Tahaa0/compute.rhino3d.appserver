@@ -17,7 +17,7 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 const data = {
-  definition: 'economicalmmm6.gh',
+  definition: 'economicalmmm8.gh',
   inputs: getInputs()
 }
 
@@ -164,6 +164,16 @@ console.log(data.inputs)
 /**
 * Parse response
 */
+function _base64ToArrayBuffer(base64) {
+  var binary_string = window.atob(base64);
+  var len = binary_string.length;
+  var bytes = new Uint8Array(len);
+  for (var i = 0; i < len; i++) {
+    bytes[i] = binary_string.charCodeAt(i);
+  }
+  return bytes.buffer;
+}
+
 function collectResults(responseJson) {
   const values = responseJson.values;
 
@@ -176,23 +186,15 @@ function collectResults(responseJson) {
 doc = new rhino.File3dm()
 // for each output (RH_OUT:*)...
 for ( let i = 0; i < values.length; i ++ ) {
+
 // ...iterate through data tree structure...
 for (const path in values[i].InnerTree) {
   const branch = values[i].InnerTree[path]
+
   // ...and for each branch...
   for( let j = 0; j < branch.length; j ++) {
     // ...load rhino geometry into doc
-    var rhinoObject = {};
-    if(branch[j].type == "System.String"){
-      console.log(branch[j]);
-      var data = JSON.parse(branch[j].data)
-      console.log(data);
-      var arr = _base64ToArrayBuffer(data);
-      console.log(arr);
-    }else{
-      rhinoObject = decodeItem(branch[j]);  
-    }
-    
+    const rhinoObject = decodeItem(branch[j]);  
 
          //GET VALUES
         if (values[i].ParamName == "RH_OUT:area") {

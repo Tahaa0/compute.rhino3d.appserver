@@ -3,7 +3,7 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.126.0/build/three.m
 import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/controls/OrbitControls.js";
 import { Rhino3dmLoader } from "https://cdn.jsdelivr.net/npm/three@0.126.0/examples/jsm/loaders/3DMLoader.js";
 import rhino3dm from "https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm.module.js";
-import THREEx from "./threex.domevents.js";
+import THREEx from "../MMM_FINAL/threex.domevents.js";
 
 console.log(THREEx);
 //import Stats from './jsm/libs/stats.module.js';
@@ -18,20 +18,29 @@ loader.setLibraryPath("https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/");
 var selected_year = 6;
 var selected_scenario = 0;
 
+var THIS_URL = new URL(window.location.href);
+var house_price = THIS_URL.searchParams.get('house_price');
+$('#house_price').html(house_price);
+
+$('#cpl').html(localStorage.getItem('cpl'));
+$('#bcm').html(localStorage.getItem('bcm'));
+$('#bcf').html(localStorage.getItem('bcf'));
+$('#bath').html(localStorage.getItem('bath'));
+$('#kit').html(localStorage.getItem('kit'));
+$('#liv').html(localStorage.getItem('liv'));
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 var data = {
-  definition: 'MMM_FINAL_0.3.gh',
+  definition: 'MMM_FINAL_PAGE_0.4.gh',
   inputs: getInputs()
-}
-
-var nextData = {
-  inputs : {}
 }
 
 let rhino, doc;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // more globals
+
+
 
 
 
@@ -81,16 +90,9 @@ downloadButton.onclick = download*/
  */
  function getInputs() {
   var inputs = {}
-  inputs['Years of Investment'] = selected_year;
 
-  inputs['Plot Price per meter square'] = parseInt(localStorage.getItem('plot'));
-
-  inputs['BedRoom-Couple'] = parseInt(localStorage.getItem('cpl'));
-  inputs['Bedroom-Children-M'] = parseInt(localStorage.getItem('bcm'));
-  inputs['Bedroom-Children-F'] = parseInt(localStorage.getItem('bcf'));
-  inputs['BathRoom'] = parseInt(localStorage.getItem('bath'));
-  inputs['Kitchen'] = parseInt(localStorage.getItem('kit'));
-  inputs['LivingRoom'] = parseInt(localStorage.getItem('liv'));
+  inputs['rec_length'] = parseFloat(THIS_URL.searchParams.get('rec_length')).toFixed(2);
+  inputs['rec_width'] = parseFloat(THIS_URL.searchParams.get('rec_width')).toFixed(2);
   return inputs
 }
 
@@ -175,14 +177,7 @@ function _base64ToArrayBuffer(base64) {
 }
 
 function refreshRoi(){
-  if(parseInt(roi[selected_scenario])>0){
-    $( "#investment" ).removeClass('red').addClass('green');
-    console.log(roi[selected_scenario]);
-    $( "#investment" ).html( "+" + roi[selected_scenario] );
-  }else{
-    $( "#investment" ).removeClass('green').addClass('red');
-    $( "#investment" ).html( roi[selected_scenario] );
-  }
+  $('#investment').html(roi[selected_scenario]);
 }
 
     
@@ -206,7 +201,15 @@ function refreshRoi(){
     });
   }
   
-  
+  $('.scenario').click(function(e){
+    $('.scenario').removeClass('selected');
+    $(this).addClass('selected');
+    if(Math.random()>0.3){
+          $( "#investment" ).html( "+" + parseInt(2000*333*Math.random()) ).removeClass('red').addClass('green');
+        }else{
+          $( "#investment" ).html( "-" + parseInt(2000*333*Math.random()) ).removeClass('green').addClass('red');
+        }
+  });
   regenerate();
   $('#regenerate').click(regenerate);
 
@@ -259,19 +262,13 @@ for (const path in values[i].InnerTree) {
         console.log(rhinoObject);
       }
          //GET VALUES
-        if (values[i].ParamName == "RH_OUT:roi") {
+        if (values[i].ParamName == "RH_OUT:gf_area") {
           //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
-          roi.push(parseInt(JSON.parse(branch[j].data)));
+          $('#gf_area').html(parseInt(JSON.parse(branch[j].data)));
         }
-
-        if (values[i].ParamName == "RH_OUT:house_price") {
-          nextData.inputs.house_price = parseInt(JSON.parse(branch[j].data));
-        }
-        if (values[i].ParamName == "RH_OUT:rec_length") {
-          nextData.inputs.rec_length = parseFloat(JSON.parse(branch[j].data));
-        }
-        if (values[i].ParamName == "RH_OUT:rec_width") {
-          nextData.inputs.rec_width = parseFloat(JSON.parse(branch[j].data));
+        if (values[i].ParamName == "RH_OUT:uf_area") {
+          //area = JSON.parse(responseJson.values[i].InnerTree['{ 0; }'][0].data)
+          $('#uf_area').html(parseInt(JSON.parse(branch[j].data)));
         }
 
        
@@ -305,7 +302,7 @@ for (const path in values[i].InnerTree) {
          mesh_circle.push(doc.objects().add(rhinoObject, null));
           
         }
-        if (values[i].ParamName == "RH_OUT:edges") {
+        if (values[i].ParamName == "RH_OUT:bigmesh") {
           
           doc.objects().add(rhinoObject, null);
           
@@ -353,7 +350,7 @@ loader.parse(buffer, function (object) {
   object.traverse((child) => {
 
     if (child.isMesh) {
-      child.material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('#EEE0DA') } ));
+      child.material = new THREE.MeshNormalMaterial(( { color:  new THREE.Color('#C53E50'), side: THREE.DoubleSide } ));
         for(var i=0;i<mesh_1.length;i++){
             if(child.userData.attributes.id.toLowerCase() == mesh_1[i]){
               child.material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('rgb('+color_1[i]+')') } ));
@@ -410,17 +407,15 @@ var mesh_circle_obj = [];
           domEvents.addEventListener(child, 'mouseover', function(event){
             child.material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('#d1b7ab') } ));
             document.body.style.cursor = "pointer";
-            selected_scenario = child.userData.scenario;
-            refreshRoi();
           }, false)
           domEvents.addEventListener(child, 'mouseout', function(event){
             child.material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('#EEE0DA') } ));
             document.body.style.cursor = "auto";
           }, false)
           domEvents.addEventListener(child, 'click', function(event){
-            var url_next = new URL('/examples/MMM_FINAL_PAGE/', window.location.origin)
-            Object.keys(nextData.inputs).forEach(key => url_next.searchParams.append(key, nextData.inputs[key]))
-            window.location = url_next.toString();
+            selected_scenario = child.userData.scenario;
+            console.log(selected_scenario);
+            refreshRoi();
           }, false)
         }
       }
@@ -476,7 +471,6 @@ var handle = $( "#custom-handle" );
           handle.html("<span id='texthandle'>"+$( this ).slider( "value" )+"</span>");
         },
         slide: function( event, ui ) {
-          showSpinner(true)
           handle.html("<span id='texthandle'>"+ui.value+"</span>");
           selected_year = ui.value-currentYear;
           console.log(selected_year);

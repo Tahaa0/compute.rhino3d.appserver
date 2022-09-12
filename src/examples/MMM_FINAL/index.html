@@ -12,58 +12,6 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
   <link rel="stylesheet" href="style.css">
     <script>
-    $( function() {
-      var handle = $( "#custom-handle" );
-      $( "#slider" ).slider({
-        value:2022,
-        min: 2020,
-        max: 2050,
-        step: 1,
-        create: function() {
-          handle.html("<span id='texthandle'>"+$( this ).slider( "value" )+"</span>");
-        },
-        slide: function( event, ui ) {
-          handle.html("<span id='texthandle'>"+ui.value+"</span>");
-          if(Math.random()>0.3){
-            $( "#investment" ).html( "+" + parseInt(2000*333*Math.random()) ).removeClass('red').addClass('green');
-          }else{
-            $( "#investment" ).html( "-" + parseInt(2000*333*Math.random()) ).removeClass('green').addClass('red');
-          }
-          
-        }
-      });
-  function selectRandomState(){
-    if(Math.random()>0.666){
-      return 'rent';
-    }else{
-      if(Math.random()>0.5){
-        return 'live';
-      }else{
-        return 'sell';
-      }
-    }
-  }
-  function regenerate(){
-    $('.scenario').html('');
-    $('.scenario').each(function(e){
-      $(this).append('<div class="'+selectRandomState()+'""></div>');
-      $(this).append('<div class="'+selectRandomState()+'""></div>');
-      $(this).append('<div class="'+selectRandomState()+'""></div>');
-    });
-  }
-  
-  $('.scenario').click(function(e){
-    $('.scenario').removeClass('selected');
-    $(this).addClass('selected');
-    if(Math.random()>0.3){
-          $( "#investment" ).html( "+" + parseInt(2000*333*Math.random()) ).removeClass('red').addClass('green');
-        }else{
-          $( "#investment" ).html( "-" + parseInt(2000*333*Math.random()) ).removeClass('green').addClass('red');
-        }
-  });
-  regenerate();
-  $('#regenerate').click(regenerate);
-    } );
   </script>
   <style>
     *{
@@ -149,13 +97,13 @@
       background-color: white;  
     }
     div.rent{
-      background-color: #8EC5F0;
+      background-color: #EA17A4;
     }
     div.live{
-      background-color: #DFEB98;
+      background-color: #62FF54;
     }
     div.sell{
-      background-color: #E578A9;
+      background-color: #FFC800;
     }
     .scenario.selected{
       background-color: rgb(00,00,0,0.75);
@@ -184,7 +132,8 @@
       margin-bottom: -200px;
       margin-top: 100px;
       z-index: 99;
-      position: relative;  
+      position: relative;
+      width: 90px;
     }
     #back{
       margin-top: 20px;
@@ -210,10 +159,10 @@
   </style>
 </head>
 <body>
-  <a href="/"><div id="back">Back</div></a>
+  <a href="../MMM_INPUT"><div id="back">Back</div></a>
   <div id="container" class="wrapper">
 
-    <div id="colors">
+    <div id="colors" style="  ">
       <div class="color"> 
         <div class="colorbox live"></div>
         <div class="text">Live</div>
@@ -227,11 +176,12 @@
         <div class="text">Sell</div>
       </div>
     </div>
+    <div id="loader"></div>
     <div id="main"></div>
       <div id="slider">
         <div id="custom-handle" class="ui-slider-handle"></div>
     </div>
-    <div id="investment" class="green">+121203</div>
+    <div id="investment" class="green">---</div>
     <div id="regenerate">Years of investment</div>
   </div>
   

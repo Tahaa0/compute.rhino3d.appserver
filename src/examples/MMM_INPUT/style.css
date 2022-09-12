@@ -77,20 +77,20 @@ h1{
   margin-top: 0;
   border-bottom:  1px solid #c7c7c7;
 }
-#loader {
-    
-    border: 2px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #222436; /* Grey */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation:spin .5s linear infinite;
-    position: absolute;
-    top: 37%;
-    left: 48%;
-    z-index: 3;
-     }
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg);}
-     } 
+#inputside{
+  border-right: 1px solid #555;
+}
+#container{
+  display: flex;
+}
+#container>div{
+  width: 50%;
+  height: 100vh;
+}
+#inputside input{
+  display: block;
+  padding: 15px;
+  width: 300px;
+  margin-bottom: 8px;
+  margin-top: 8px;
+}

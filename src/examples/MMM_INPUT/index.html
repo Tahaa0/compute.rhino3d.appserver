@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MMM</title>
+  <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="style.css">
+    <script>
+  </script>
+  <style>
+    *{
+      font-family: 'Montserrat';
+    }
+    #plot{
+      font-family: 'Montserrat';
+      font-size: 30px;
+      text-align: center;
+      font-weight: 400;
+      
+      width: 250px;
+      border-radius: 6px;
+      margin: 0 auto;
+      margin-top: 30px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      color: #444;
+      background-color: rgb(17, 179, 168,0.13);
+    }
+    #next{
+      float: right;
+      margin-top: 30px;
+    }
+    #inputside,#outputside{
+      padding-top: 30px;
+    }
+    h1{
+      padding-bottom: 30px;
+    }
+    #outputside p{
+      margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="container" class="wrapper">
+    <div id="inputside">
+      <h1>Input</h1>
+      
+      <div style="height: 10px;"></div>
+      <input type="text" id='i_plot' placeholder="Plot price per m²">
+      <p>Required program :</p>
+      <input type="text" id='i_cpl' placeholder="Bedroom Couple">
+      <input type="text" id='i_bcm' placeholder="Bedroom Children (M)">
+      <input type="text" id='i_bcf' placeholder="Bedroom Children (F)">
+      <input type="text" id='i_bath' placeholder="Bathrooms">
+      <input type="text" id='i_kit' placeholder="Kitchen">
+      <input type="text" id='i_liv' placeholder="Living Room">
+      
+      <button id="validate">Validate</button>
+    </div>
+    <div id="outputside">
+      <h1>Output</h1>
+      <p>Minimal plot size required for the program</p>
+      <div id="plot">XXX m²</div>
+      <button id="next">Next</button>
+    </div>
+  </div>
+  
+    <script type="module" src="./script.js"> </script>
+<script></script>
+</body>
+</html>

@@ -15,7 +15,7 @@ html{
   background-attachment: fixed;
 }
 .wrapper{
-  max-width: 1050px;
+  max-width: 75%;
   margin: 0 auto;
 }
 #menu{

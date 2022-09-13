@@ -15,8 +15,7 @@ html{
   background-attachment: fixed;
 }
 .wrapper{
-  max-width: 1050px;
-  margin: 0 auto;
+  
 }
 #menu{
   width: 600px;
@@ -78,19 +77,40 @@ h1{
   border-bottom:  1px solid #c7c7c7;
 }
 #inputside{
-  border-right: 1px solid #555;
+  padding-left: 7%;
+  padding-right: 7%;
 }
 #container{
   display: flex;
+  align-items: center;
 }
 #container>div{
-  width: 50%;
+  width: 28%;
   height: 100vh;
 }
-#inputside input{
+#outputside input{
   display: block;
+  margin: 0 auto;
   padding: 15px;
   width: 300px;
   margin-bottom: 8px;
   margin-top: 8px;
+
+}
+#finalside{
+  width: 10%;
+}
+#next{
+  margin-top: 300px !important;
+      width: 120px;
+      background-color: #303234;
+      color: #FFF !important  ;
+      border-radius: 6px;
+      padding-top: 9px;
+      padding-bottom: 9px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 16px;
+      margin-bottom: -40px;
+      margin-left: 20px; 
 }

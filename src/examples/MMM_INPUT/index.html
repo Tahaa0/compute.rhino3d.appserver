@@ -32,8 +32,9 @@
       color: #444;
       background-color: rgb(17, 179, 168,0.13);
     }
-    #next{
-      float: right;
+    #next,#validate{
+      display: block;
+      margin: 0 auto;
       margin-top: 30px;
     }
     #inputside,#outputside{
@@ -43,16 +44,22 @@
       padding-bottom: 30px;
     }
     #outputside p{
-      margin-left: 20px;
+    }
+    #outputside{
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <div id="container" class="wrapper">
     <div id="inputside">
-      <h1>Input</h1>
-      
-      <div style="height: 10px;"></div>
+      <h2>MoroccanModernHouse</h2>
+      <p>The Moroccan Modern House constitutes 75% of the urban landscape in Morocco. These typologies are developed in a constant speed that it is almost impossible to trace their sprawl due to their openness to evolution and their economical value.</p>
+      <p>This app's goal is to model a Decision Support System that helps to visualize the possible scenarios of the MMH evolution based on the household programmatic needs. It calculates the necessary plot area, then showcases the Return of Investment in a timeline based on the 3 possible actions: Live, Sell, and Rent.</p>
+      <p>A proactive parametric model is created to track the pricing of the MoroccanModernHouse & its economical plans.</p>
+      <p>This app calculates the prices based on a inflation rate of 0.02% per year.</p>
+    </div>
+    <div id="outputside">
       <input type="text" id='i_plot' placeholder="Plot price per m²">
       <p>Required program :</p>
       <input type="text" id='i_cpl' placeholder="Bedroom Couple">
@@ -63,11 +70,12 @@
       <input type="text" id='i_liv' placeholder="Living Room">
       
       <button id="validate">Validate</button>
-    </div>
-    <div id="outputside">
-      <h1>Output</h1>
       <p>Minimal plot size required for the program</p>
       <div id="plot">XXX m²</div>
+      
+      
+    </div>
+    <div id="finalside">
       <button id="next">Next</button>
     </div>
   </div>

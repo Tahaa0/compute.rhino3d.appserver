@@ -230,6 +230,16 @@ roi = [];
 
 
 function collectResults(responseJson) {
+
+  mesh_1 = [];
+color_1 = [];
+mesh_2 = [];
+color_2 = [];
+mesh_3 = [];
+color_3 = [];
+mesh_circle = [];
+roi = [];
+
   const values = responseJson.values;
 
   console.log(values);
@@ -350,6 +360,8 @@ loader.parse(buffer, function (object) {
   ///////////////////////////////////////////////////////////////////////
   // materials //
   // brep
+  console.log(mesh_circle);
+
   object.traverse((child) => {
 
     if (child.isMesh) {
@@ -405,23 +417,33 @@ var mesh_circle_obj = [];
     if (child.isMesh) {
       for(var i=0;i<mesh_circle.length;i++){
         if(child.userData.attributes.id.toLowerCase() == mesh_circle[i]){
-          child.userData.scenario = i;
           mesh_circle_obj.push(child);
-          domEvents.addEventListener(child, 'mouseover', function(event){
+        }
+      }
+      for(var i=0;i<mesh_circle.length;i++){
+        if(child.userData.attributes.id.toLowerCase() == mesh_circle[i]){
+          child.userData.scenario = i;
+          domEvents.addEventListener(child, 'click', function(event){
+            for(var key in mesh_circle_obj){
+              mesh_circle_obj[key].material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('#EEE0DA') } ));
+            }
             child.material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('#d1b7ab') } ));
             document.body.style.cursor = "pointer";
             selected_scenario = child.userData.scenario;
             refreshRoi();
           }, false)
-          domEvents.addEventListener(child, 'mouseout', function(event){
+          $('#next').click(function(){
+            var url_next = new URL('/examples/MMM_FINAL_PAGE/', window.location.origin)
+            Object.keys(nextData.inputs).forEach(key => url_next.searchParams.append(key, nextData.inputs[key]))
+            window.location = url_next.toString();
+          });
+          /*domEvents.addEventListener(child, 'mouseout', function(event){
             child.material = new THREE.MeshBasicMaterial(( { color:  new THREE.Color('#EEE0DA') } ));
             document.body.style.cursor = "auto";
           }, false)
           domEvents.addEventListener(child, 'click', function(event){
-            var url_next = new URL('/examples/MMM_FINAL_PAGE/', window.location.origin)
-            Object.keys(nextData.inputs).forEach(key => url_next.searchParams.append(key, nextData.inputs[key]))
-            window.location = url_next.toString();
-          }, false)
+            
+          }, false)*/
         }
       }
     }
@@ -465,6 +487,8 @@ return null
 * Called when a slider value changes in the UI. Collect all of the
 * slider values and call compute to solve for a new scene
 */
+var sliderChangeTimeout;
+
 var handle = $( "#custom-handle" );
       const currentYear = new Date().getFullYear();
       $( "#slider" ).slider({
@@ -476,15 +500,17 @@ var handle = $( "#custom-handle" );
           handle.html("<span id='texthandle'>"+$( this ).slider( "value" )+"</span>");
         },
         slide: function( event, ui ) {
-          showSpinner(true)
-          handle.html("<span id='texthandle'>"+ui.value+"</span>");
-          selected_year = ui.value-currentYear;
-          console.log(selected_year);
-          //refreshRoi();
-          data.inputs['Years of Investment'] = selected_year;
-          roi = [];
-          compute();
-
+          clearTimeout(sliderChangeTimeout);
+          sliderChangeTimeout = setTimeout(function(){
+            showSpinner(true)
+            handle.html("<span id='texthandle'>"+ui.value+"</span>");
+            selected_year = ui.value-currentYear;
+            console.log(selected_year);
+            //refreshRoi();
+            data.inputs['Years of Investment'] = selected_year;
+            roi = [];
+            compute();
+          },500);
         }
       });
 
